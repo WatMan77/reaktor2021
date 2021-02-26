@@ -1,0 +1,1 @@
+web: deno run --allow-ll=:${PORT} app.js ${PORT}

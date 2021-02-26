@@ -1,0 +1,11 @@
+<%-include("./partials/header.ejs") %>
+<div class="main">
+    <h1>Gloves</h1>
+    <div class="box">
+        <% gloves.map(glove => { %>
+            <div><p class="item"><%= glove.name %></p><p class="availability"><%= glove.available %></p></div>
+            <% }); %>
+        </div>
+</div>
+<
+<%-include('./partials/footer.ejs') %>

@@ -1,0 +1,10 @@
+<%-include("./partials/header.ejs") %>
+<div class="main">
+    <h1>Masks</h1>
+    <div class="box">
+    <% masks.map(mask => { %>
+        <div><p class="item"><%= mask.name %></p><p class="availability"><%= mask.available %></p></div>
+        <% }); %>
+    </div>
+</div>
+    <%-include("./partials/footer.ejs") %>
