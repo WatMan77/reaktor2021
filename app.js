@@ -30,7 +30,7 @@ if (Deno.args.length > 0) {  const lastArgument = Deno.args[Deno.args.length - 1
 app.listen({ port: port });
 
 /*if(!Deno.env.get("TEST_ENVIRONMENT")){
-    app.listen( { port: 7777});
+    app.listen( { port: port});
 }*/
 
 
