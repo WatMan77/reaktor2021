@@ -1,1 +1,1 @@
-web: deno run --allow-all --unstable=:${PORT} app.js ${PORT}
+web: deno run --allow-all --unstable app.js ${PORT}
