@@ -72,7 +72,7 @@ const updateMans = async(fail) => {
     for(var i = 0; i < names.length; i++){
         manufacturers.set(names[i], data[i]);
     }
-    
+
     //As the final step, we match the availability status of each item by
     //looking up the manufacturer and finding the item with the coressponding ID.
     items.forEach((type) => {
@@ -108,7 +108,7 @@ const updateItems = async(fail) => {
 //We update the items of the shop every hour as they (seem to at least) change after some amount of time.
 //As the fecthing is a bit slow, once every hour should be fine.
 await updateItems(false)
-setInterval( async() => await updateItems(false), 1000*60*60);
+//setInterval( async() => await updateItems(false), 1000*60*60);
 
 //Getters for items
 const getGloves = () => gloves;
