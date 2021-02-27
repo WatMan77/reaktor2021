@@ -1,0 +1,32 @@
+Reaktor summer 2021 pre-assignment documentation by Daniel Kaluski
+
+The purpose of this application is to retrieve clothing items for a madeup company and 
+show those clothes (gloves, masks and beanies) on a webpage. 2 APIs are used to retrieve needed information. The first
+API retrieves the clothes themselves and the second one has the information about the items availability.
+
+The application was made using Deno 1.4.6. Trying to use the newest version doesn't work some reason.  TS2345 [ERROR] comes up
+saying the error is in https://deno.land/x/postgres@v0.4.5/utils.ts:94:15 meaning the problem is most likely in the source code of Deno.
+
+All files with Controller.js in their names are used for the rendering of different pages. Their code looks almost the same,
+but they are kept separate in case some bigger changes would have been made to them individually.
+
+The main logic for the webpage is in fetchingService.js. As we already know we fetch data for beanies, gloves and masks, we do those and save
+the manufacturers for later. Fetching is pretty straight forward. After the first fetching has been done, manufacturers are fetched and inserted into 
+a Map. Here is where the real error checking is done. From experimenting it was found out that sometimes the response is just a string "[]" or even undefined.
+New fetching is done but only for those manufacturers that had a previous problem. In order to speed up the process, all the fetchings (not only 
+in error handling) are done concurrently using Promise.all. Lastly we give each item their availability from the manufacturers API. The IDs are what
+connect the two APIs. By going through all the clothes, we search their manufacturer and find the corresponding ID and get the availability.
+
+Runnin the application locally:
+1. Download Deno version 1.4.6 (other versions might not work)
+2. In the command line, cd into the root of the project
+3. run the application with: deno run --allow-all app.js
+*4. Should some problems occur, try running with: deno run --allow-all --unstable app.js
+
+Running the tests:
+A few tests have been implemented to make make sure the main functionalities work as intended. Running the tests is possible in a few ways:
+Using the command line cmd:
+1. cd into the root of the project.
+2. run the command: deno test --allow-all
+The tests should run automatically. Should they not, add "basic_test.js" at the end.
+3. Make sure to shut down the application with Ctrl + C after the test

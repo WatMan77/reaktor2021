@@ -97,7 +97,11 @@ const updateItems = async(fail) => {
     let items = ["gloves", "beanies", "facemasks"];
     [gloves, beanies, masks] = await Promise.all(
         items.map(end =>
-                fetch(`https://bad-api-assignment.reaktor.com/v2/products/${end}`)
+                fetch(`https://bad-api-assignment.reaktor.com/v2/products/${end}`, {
+                    headers: {
+                        "x-force-error-mode": "all",
+                    }
+                })
                 .then(response => response.json()))
                 )
 
