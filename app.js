@@ -1,12 +1,8 @@
 import  { Application, viewEngine, engineFactory, adapterFactory, Session} from "./deps.js"
 import * as middleware from "./middleware/middleware.js"
 import { router } from "./routes/routes.js"
-import { updateItems } from "./service/fetchingService.js"
 
 const app = new Application();
-//setInterval(() => console.log("Moi"), 1000);
-//await updateItems(false)
-//setInterval(await updateItems(false), 1000*60*7);
 
 const session = new Session({ framework: "oak"});
 await session.init();
@@ -18,12 +14,12 @@ app.use(viewEngine(oakAdapter, ejsEngine, {
 }))
 
 app.use(session.use()(session));
-
 app.use(middleware.errorMiddleware);
-//app.use(middleware.sessionMiddleware);
 app.use(middleware.serveStaticFile);
 
 app.use(router.routes());
+
+console.log("This is in APP!")
 
 let port = 7777;
 //Make sure Heroku uses the correct port
