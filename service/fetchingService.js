@@ -48,7 +48,6 @@ const updateMans = async(fail) => {
                         }
                     })
                     .then(response => {
-                    // console.log(`Is it ok? ${response.ok}`);
                         return response.json();
                     })
                     )
@@ -65,7 +64,6 @@ const updateMans = async(fail) => {
         }
 
     //If the type of the array (.response) is a string or object is undefined, that means an error occured and a new fetch must be made.
-    console.log(`Checking for errors`)
     await errorChecking(data, names);
     console.log("Errors should now be resolved")
     
@@ -79,7 +77,6 @@ const updateMans = async(fail) => {
         type.forEach((item) => {
             const found = manufacturers.get(item.manufacturer);
             if(!found){ //Unlikely to happen but here as a safe measurement
-                console.log("Availability not found!!")
                 item.available = "AVAILABILITY UNKNOWN"
             } else {
                 item.available = found
@@ -93,15 +90,10 @@ const updateMans = async(fail) => {
 
 //The final function which updates the items, availability etc by making new API calls.
 const updateItems = async(fail) => {
-    console.log("Update items has been called!")
     let items = ["gloves", "beanies", "facemasks"];
     [gloves, beanies, masks] = await Promise.all(
         items.map(end =>
-                fetch(`https://bad-api-assignment.reaktor.com/v2/products/${end}`, {
-                    headers: {
-                        "x-force-error-mode": "all",
-                    }
-                })
+                fetch(`https://bad-api-assignment.reaktor.com/v2/products/${end}`)
                 .then(response => response.json()))
                 )
 
@@ -112,7 +104,7 @@ const updateItems = async(fail) => {
 //We update the items of the shop every hour as they (seem to at least) change after some amount of time.
 //As the fecthing is a bit slow, once every hour should be fine.
 await updateItems(false)
-//setInterval( async() => await updateItems(false), 1000*60*60);
+setInterval( async() => await updateItems(false), 1000*60*60);
 
 //Getters for items
 const getGloves = () => gloves;

@@ -36,7 +36,3 @@ Deno.test("After a failed fetch has been corrected, GET requests should work nor
         await testClient.get(`/${sites[i]}`).expect(200);
     }
 });
-
-Deno.test("Removing one item from a manufacturer should result in at least one 'UNKNOWN AVAILABILITY'", async() => {
-    
-})
