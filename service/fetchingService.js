@@ -72,15 +72,14 @@ const updateMans = async(fail) => {
     }
 
     //As the final step, we match the availability status of each item by
-    //looking up the manufacturer and finding the item with the coressponding ID.
+    //looking up the manufacturer and finding the item with the corresponding ID.
     items.forEach((type) => {
         type.forEach((item) => {
-            const found = manufacturers.get(item.manufacturer);
+            const found = manufacturers.get(item.manufacturer).response.find(x => x.id.toLowerCase() === item.id);
             if(!found){ //Unlikely to happen but here as a safe measurement
                 item.available = "AVAILABILITY UNKNOWN"
             } else {
                 item.available = found
-                .response.find(x => x.id.toLowerCase() === item.id)
                 .DATAPAYLOAD.match(new RegExp("(?<=<INSTOCKVALUE>)(.*)(?=<\/INSTOCKVALUE>)"))[0]
             }
         });
