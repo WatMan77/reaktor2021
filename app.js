@@ -19,8 +19,6 @@ app.use(middleware.serveStaticFile);
 
 app.use(router.routes());
 
-console.log("This is in APP!")
-
 let port = 7777;
 //Make sure Heroku uses the correct port
 if (Deno.args.length > 0) {
