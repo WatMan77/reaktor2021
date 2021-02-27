@@ -3,7 +3,7 @@ import { showRoot } from "./controller/rootController.js";
 import { showGloves } from "./controller/glovesController.js";
 import { showBeanies } from "./controller/beaniesController.js"
 import { showMasks } from "./controller/masksController.js"
-
+//Router to make routin much easier.
 const router = new Router();
 
 router.get('/', showRoot);
